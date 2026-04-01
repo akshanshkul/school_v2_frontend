@@ -1,18 +1,22 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 3000,
-    allowedHosts: [
-      '5ce1-2401-4900-5d96-cbc0-a9b5-2dd6-c37f-8af7.ngrok-free.app'
-    ],
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+
+  return {
+    plugins: [react()],
+    server: {
+      port: parseInt(env.VITE_PORT) || 3000,
+      allowedHosts: [
+        env.VITE_ALLOWED_HOST
+      ].filter(Boolean),
+      proxy: {
+        '/api': {
+          target: env.VITE_BACKEND_URL || 'http://localhost:8000',
+          changeOrigin: true,
+        }
       }
     }
   }
