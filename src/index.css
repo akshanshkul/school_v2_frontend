@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 min-h-screen antialiased leading-[1.5];
+    font-family: 'Roboto', sans-serif;
+  }
+}
+
+@layer components {
+  .app-card {
+    @apply bg-white border border-slate-100 rounded-[24px] shadow-sm hover:shadow-md transition-all duration-300;
+  }
+  
+  .auth-input {
+    @apply w-full p-3.5 bg-slate-100/50 border border-transparent rounded-xl text-slate-900 focus:bg-white focus:border-indigo-600/20 focus:ring-4 focus:ring-indigo-600/5 outline-none transition-all text-sm font-medium;
+  }
+  
+  .primary-btn {
+    @apply w-full p-3.5 bg-indigo-600 rounded-xl text-white font-medium hover:bg-indigo-700 active:scale-[0.98] transition-all text-sm shadow-xl shadow-indigo-600/20 tracking-[0.5px];
+  }
+
+
+  .sidebar-link-active {
+    @apply flex items-center gap-3 px-5 py-3.5 rounded-xl text-sm font-medium bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-xl shadow-indigo-600/30 -translate-y-0.5 transition-all duration-300;
+  }
+
+  .sidebar-link-inactive {
+    @apply flex items-center gap-3 px-5 py-3.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-50 hover:text-indigo-600 transition-all duration-300;
+  }
+
+  .setup-label {
+    @apply text-[10px] font-medium text-slate-400 uppercase tracking-[0.2em] px-5 mb-3 mt-8;
+  }
+
+  /* Dabang Progress Bar */
+  .progress-bar-container {
+    @apply w-full h-1.5 bg-slate-100 rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full rounded-full transition-all duration-500;
+  }
+
+  /* Timetable Advanced Styling */
+  .bg-pattern-lines {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.4) 10px,
+      rgba(255, 255, 255, 0.4) 11px
+    );
+  }
+
+  .bg-merge-glow {
+    @apply bg-gradient-to-br from-fuchsia-600 to-purple-700 text-white shadow-lg shadow-fuchsia-500/30;
+    animation: pulse-subtle 3s infinite ease-in-out;
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.95; transform: scale(0.99); }
+  }
+}

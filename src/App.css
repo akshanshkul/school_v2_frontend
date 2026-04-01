@@ -1,0 +1,12 @@
+/* App.css - Local component styles */
+.layout-container {
+  min-height: 100vh;
+}
+
+.auth-container {
+  /* ...handled by global.css... */
+}
+
+.dashboard {
+  /* ...handled by global.css... */
+}
