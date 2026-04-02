@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../api/axios';
 
 interface SchoolPublicInfo {
     id: number;
@@ -82,7 +82,7 @@ const PublicLandingPage: React.FC = () => {
                 else if (isCustomDomain) params = { domain: hostname };
                 else { setError(true); setLoading(false); return; }
 
-                const res = await axios.get('http://localhost:8000/api/school/public', { params });
+                const res = await axiosInstance.get('/school/public', { params });
                 setSchoolInfo(res.data);
             } catch (err) { setError(true); } finally { setLoading(false); }
         };
@@ -118,7 +118,7 @@ const PublicLandingPage: React.FC = () => {
         if (!schoolInfo) return;
         setInqStatus('loading');
         try {
-            await axios.post('http://localhost:8000/api/inquiries', {
+            await axiosInstance.post('/inquiries', {
                 school_id: schoolInfo.id, name: inqName, email: inqEmail, phone: inqPhone, message: inqMessage,
             });
             setInqStatus('success');
@@ -149,7 +149,7 @@ const PublicLandingPage: React.FC = () => {
         }
 
         try {
-            await axios.post('http://localhost:8000/api/admissions', fd);
+            await axiosInstance.post('/admissions', fd);
             setAdmStatus('success');
             setAdmName(''); setAdmClass(''); setAdmParent(''); setAdmPhone(''); setAdmEmail(''); setAdmPrevSchool(''); setAdmAddress(''); setAdmOccupation(''); setAdmPhoto(null);
         } catch (err) { setAdmStatus('error'); }
